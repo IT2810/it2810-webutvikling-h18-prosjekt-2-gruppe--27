@@ -264,3 +264,6 @@ $RECYCLE.BIN/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore entire idea dir
+.idea/
