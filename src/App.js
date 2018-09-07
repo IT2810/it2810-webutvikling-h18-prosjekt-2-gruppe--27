@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Tabs from './Components/Tabs.js'
+import Tabs from './Components/Tabs.js';
+import Test from './Components/Test.js';
 
 class App extends Component {
   render() {
@@ -16,9 +17,10 @@ class App extends Component {
         </p>
 
         <Tabs>
-          <div name="Art 1">Container for art 1</div>
-          <div name="Art 2">Container for art 2</div>
-          <div name="Art 3">Container for art 3</div>
+          <Test name="Art 1"/>
+          <Test name="Art 2"/>
+          <Test name="Art 3"/>
+          <Test name="Art 4"/>
         </Tabs>
       </div>
     );

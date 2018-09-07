@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React, {Component} from 'react';
 import Tab from './Tab';
 
 class Tabs extends Component {
@@ -11,26 +10,20 @@ class Tabs extends Component {
   }
 
   onClickTabItem = (tab) => {
-    this.setState({ currentTab: tab });
+    this.setState({currentTab: tab});
   };
 
   render() {
-    const {
-      onClickTabItem,
-      props: {
-        children,
-      },
-      state: {
-        currentTab,
-      }
-    } = this;
+    const {onClickTabItem} = this;
+    const {children} = this.props;
+    const {currentTab} = this.state;
 
     return (
       <div className="tabs">
         <ol className="tab-list">
           {children.map((child, index) => {
-            const { name } = child.props;
-
+            console.log(child.props.name);
+            const {name} = child.props; /*Why does not .name work?*/
             return (
               <Tab
                 currentTab={currentTab}
@@ -43,8 +36,7 @@ class Tabs extends Component {
         </ol>
         <div className="tab-content">
           {children.map((child) => {
-            if (child.props.name !== currentTab) return undefined;
-            return child.props.children;
+            return child.props.name !== currentTab ? undefined : child;
           })}
         </div>
       </div>

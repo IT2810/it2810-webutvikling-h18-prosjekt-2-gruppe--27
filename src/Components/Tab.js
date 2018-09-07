@@ -7,25 +7,17 @@ class Tab extends Component {
   };
 
   render() {
-    const {
-      handleClick,
-      props: {
-        currentTab,
-        name,
-      },
-    } = this;
+    const {handleClick} = this;
+    const {currentTab, name} = this.props;
 
-    let className = 'tab-list-item';
+    let className = 'tab-item';
 
     if (currentTab === name) {
-      className += ' tab-list-active';
+      className += ' tab-item-current';
     }
 
     return (
-      <li
-        className={className}
-        onClick={handleClick}
-      >
+      <li className={className} onClick={handleClick}>
         {name}
       </li>
     );
