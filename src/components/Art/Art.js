@@ -5,7 +5,7 @@ class Art extends Component {
     return (
       <div>
         <img src={this.props.img} alt={this.props.img} />
-        // TODO: Add div for text and for music???
+        {/*TODO: Add div for text and for music???*/}
       </div>
     );
   }
