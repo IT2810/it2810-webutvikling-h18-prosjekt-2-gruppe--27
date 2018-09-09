@@ -7,6 +7,7 @@ class Tabs extends Component {
     this.state = {
       currentTab: this.props.children[0].props.name,
     };
+    this.onClickTabItem = this.onClickTabItem.bind(this);
   }
 
   onClickTabItem = (tab) => {
@@ -14,28 +15,24 @@ class Tabs extends Component {
   };
 
   render() {
-    const {onClickTabItem} = this;
-    const {children} = this.props;
-    const {currentTab} = this.state;
-
+    const currentTab = this.state.currentTab;
     return (
       <div className="tabs">
         <ol className="tab-list">
-          {children.map((child, index) => {
-            console.log(child.props.name);
-            const {name} = child.props; /*Why does not .name work?*/
+          {this.props.children.map((child, index) => {
+            const name = child.props.name;
             return (
               <Tab
                 currentTab={currentTab}
                 key={index}
                 name={name}
-                onClick={onClickTabItem}
+                onClick={this.onClickTabItem}
               />
             );
           })}
         </ol>
         <div className="tab-content">
-          {children.map((child) => {
+          {this.props.children.map((child) => {
             return child.props.name !== currentTab ? undefined : child;
           })}
         </div>

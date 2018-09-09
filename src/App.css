@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  width: 100%;
 }
 
 .App-logo {
@@ -48,12 +49,16 @@
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 5px 5px 0 0;
-  background-color: #d3d3d3;
+  background-color: #e2e2e2;
 }
 
 .tab-item-current {
-  background-image: linear-gradient(#d3d3d3, white);
-  border: solid #d3d3d3;
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  margin-left: 2px;
+  padding: 0.5em 0.75em;
+  background-color: #d3d3d3;
   border-radius: 5px 5px 0 0;
   border-width: 1px 1px 0 1px;
 }
@@ -67,9 +72,7 @@
   .tab-item {
     display: block;
     list-style: none;
-    margin-bottom: 5px;
-    border-radius: initial;
-    padding: 0.5em 0.75em;
+    margin-bottom: -1px;
   }
   .tab-item:hover{
     cursor: pointer;
@@ -77,7 +80,11 @@
   }
 
   .tab-item-current {
-    background: #d3d3d3 none;
+    display: block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5em 0.75em;
+    background-color: #d3d3d3;
     border-radius: initial;
   }
 }
