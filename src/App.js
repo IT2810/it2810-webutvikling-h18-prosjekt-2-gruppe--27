@@ -10,27 +10,27 @@ class App extends Component {
     super(props);
     const state = {};
 
-    // generate objects for each static resource
-    const resources = {};
-    for (let fileType in importedResources) {
-      resources[fileType] = {};
-      for (let cat in importedResources[fileType]) {
-        if (importedResources[fileType].hasOwnProperty(cat)) {
-          resources[fileType][cat] = [];
-          importedResources[fileType][cat].forEach((e, i) => {
-            resources[fileType][cat].push({
-              id: i,
-              url: `${fileType}/${cat}/${e}`,
-              loaded: false,
-              error: false,
-              blob: null
-            });
-          });
+    // deep copy resources to avoid state changes from module scope
+    const resources = JSON.parse(JSON.stringify(importedResources));
+
+    // store each file as an object
+    for (let fileType in resources) {
+      if (!resources.hasOwnProperty(fileType)) continue;
+      for (let category in resources[fileType]) {
+        if (!resources[fileType].hasOwnProperty(category)) continue;
+        for (let i = 0; i < resources[fileType][category].length; i++) {
+          const filename = resources[fileType][category][i];
+          resources[fileType][category][i] = {
+                      id: i,
+                      url: `${fileType}/${category}/${filename}`,
+                      loaded: false,
+                      error: false,
+                      blob: null
+          };
         }
       }
     }
     state.resources = resources;
-    console.log(resources);
 
     state.activeTab = 0;
     state.activeCategory = {image: "", sound: "", text: ""};
