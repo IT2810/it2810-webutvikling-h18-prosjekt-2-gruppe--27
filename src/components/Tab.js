@@ -3,27 +3,23 @@ import React, {Component} from 'react';
 class Tab extends Component {
   constructor(props) {
     super(props);
-    this.onClick = this.props.onClick.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
-  handleClick = () => {
-    const name = this.props.name;
-    const onClick = this.props.onClick;
-    onClick(name);
-  };
+  onClick () {
+    this.props.onClick(this);
+  }
 
   render() {
     const name = this.props.name;
-    const currentTab = this.props.currentTab;
-
+    const currentTab = this.props.currentTabId;
     let className = 'tab-item';
 
-    if (currentTab === name) {
+    if (currentTab === this.props.id) {
       className = 'tab-item-current';
     }
-
     return (
-      <li className={className} onClick={this.handleClick}>
+      <li className={className} onClick={this.onClick}>
         {name}
       </li>
     );

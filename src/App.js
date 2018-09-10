@@ -113,20 +113,19 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Tabs>
+        <Tabs
+          onActiveTabChange={this.handleActiveTabChange}
+          currentTabId={this.state.activeTab}
+        >
           <Test name="Art 1"/>
           <Test name="Art 2"/>
           <Test name="Art 3"/>
           <Test name="Art 4"/>
         </Tabs>
 
-        <button onClick={() => this.handleActiveTabChange(0)}>Tab 0</button>
-        <button onClick={() => this.handleActiveTabChange(1)}>Tab 1</button>
-        <button onClick={() => this.handleActiveTabChange(2)}>Tab 2</button>
-        <button onClick={() => this.handleActiveTabChange(3)}>Tab 3</button>
         <p>Current tab is {this.state.activeTab}</p>
         <Radio onCategoryChange={this.handleCategoryChange} />
-        
+
         <p>Image permutation: {(!!this.state.permutation) ? this.state.permutation.imageId : ""}</p>
         <Art
           imageSrc={imageSrc}
