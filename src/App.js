@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Tabs from './Components/Tabs.js';
-import Test from './Components/Test.js';
+import Tabs from './components/Tabs.js';
+import Test from './components/Test.js';
 
 class App extends Component {
   render() {
