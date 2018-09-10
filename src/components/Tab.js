@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 
 class Tab extends Component {
-  onClick () {
+  constructor(props) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
     this.props.onClick(this);
   }
 
