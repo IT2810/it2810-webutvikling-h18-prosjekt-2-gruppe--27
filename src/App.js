@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Radio from './components/Radio';
-
 import Tabs from './components/Tabs.js';
-import Test from './components/Test.js';
 import Art from "./components/Art/Art";
 import importedResources from "./resources";
 import shuffleArray from "./utils/shuffle";
@@ -117,10 +114,10 @@ class App extends Component {
           onActiveTabChange={this.handleActiveTabChange}
           currentTabId={this.state.activeTab}
         >
-          <Test name="Art 1"/>
-          <Test name="Art 2"/>
-          <Test name="Art 3"/>
-          <Test name="Art 4"/>
+          <div>Art 1</div>
+          <div>Art 2</div>
+          <div>Art 3</div>
+          <div>Art 4</div>
         </Tabs>
 
         <p>Current tab is {this.state.activeTab}</p>
