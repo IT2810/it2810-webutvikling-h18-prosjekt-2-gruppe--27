@@ -9,28 +9,18 @@ class Radio extends Component {
       tgenre: ''
     };
 
-    this.handleChanges = this.handleChanges.bind(this);
-    this.handleChangep = this.handleChangep.bind(this);
-    this.handleChanget = this.handleChanget.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  //when a radiobutton is clicked
-  handleChanges(event) {
-    this.setState({
-      sgenre: event.target.value,
-    });
-  }
-
-  handleChangep(event) {
-    this.setState({
-      pgenre: event.target.value,
-    });
-  }
-
-  handleChanget(event) {
-    this.setState({
-      tgenre: event.target.value,
-    });
+  handleChange(event){
+    console.log(event.target.value);
+    console.log(event.target.name);
+    console.log({[event.target.name]: event.target.value});
+    // x = {a: 1, b: 2}
+    // y = "a"
+    // x[y] = 4
+    // x.a = 4
+    this.props.onCategoryChange({[event.target.name]: event.target.value});
   }
 
   render() {
@@ -42,8 +32,7 @@ class Radio extends Component {
               name={"sound"}
               type="radio"
               value="animal"
-              checked={this.state.sgenre === "animal"}
-              onChange={this.handleChanges}
+              onChange={this.handleChange}
             />
             animal
           </label>
@@ -53,8 +42,7 @@ class Radio extends Component {
               name={"sound"}
               type="radio"
               value="nature"
-              checked={this.state.sgenre === "nature"}
-              onChange={this.handleChanges}
+              onChange={this.handleChange}
             />
             nature
           </label>
@@ -64,44 +52,40 @@ class Radio extends Component {
               name={"sound"}
               type="radio"
               value="instrument"
-              checked={this.state.sgenre === "instrument"}
-              onChange={this.handleChanges}
+              onChange={this.handleChange}
             />
             instrument
           </label>
         </div>
 
 
-        <div id="picture" className={"picture"}>
+        <div id="picture" className={"image"}>
           <label>
             <input
-              name={"picture"}
+              name={"image"}
               type="radio"
               value="food"
-              checked={this.state.pgenre === "food"}
-              onChange={this.handleChangep}
+              onChange={this.handleChange}
             />
             food
           </label>
 
           <label>
             <input
-              name={"picture"}
+              name={"image"}
               type="radio"
               value="instrument"
-              checked={this.state.pgenre === "instrument"}
-              onChange={this.handleChangep}
+              onChange={this.handleChange}
             />
             instrument
           </label>
 
           <label>
             <input
-              name={"picture"}
+              name={"image"}
               type="radio"
               value="party"
-              checked={this.state.pgenre === "party"}
-              onChange={this.handleChangep}
+              onChange={this.handleChange}
             />
             party
           </label>
@@ -115,8 +99,7 @@ class Radio extends Component {
               name={"text"}
               type="radio"
               value="poems"
-              checked={this.state.tgenre === "poems"}
-              onChange={this.handleChanget}
+              onChange={this.handleChange}
             />
             poems
           </label>
@@ -126,8 +109,7 @@ class Radio extends Component {
               name={"text"}
               type="radio"
               value="stars"
-              checked={this.state.tgenre === "stars"}
-              onChange={this.handleChanget}
+              onChange={this.handleChange}
             />
             stars
           </label>
@@ -137,8 +119,7 @@ class Radio extends Component {
               name={"text"}
               type="radio"
               value="hearts"
-              checked={this.state.tgenre === "hearts"}
-              onChange={this.handleChanget}
+              onChange={this.handleChange}
             />
             hearts
           </label>

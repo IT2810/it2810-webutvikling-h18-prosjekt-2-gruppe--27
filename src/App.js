@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Radio from './Radio';
+import Radio from './components/Radio';
 
 import Tabs from './components/Tabs.js';
 import Test from './components/Test.js';
@@ -62,6 +62,7 @@ class App extends Component {
                          sound = this.state.activeCategory.sound,
                          text = this.state.activeCategory.text
   } = {}) {
+    console.log(({activeCategory: {image, sound, text}}));
     this.setState({activeCategory: {image, sound, text}});
   }
 
@@ -112,48 +113,20 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-
-
         <Tabs>
           <Test name="Art 1"/>
           <Test name="Art 2"/>
           <Test name="Art 3"/>
           <Test name="Art 4"/>
         </Tabs>
-        <Radio />
+
         <button onClick={() => this.handleActiveTabChange(0)}>Tab 0</button>
         <button onClick={() => this.handleActiveTabChange(1)}>Tab 1</button>
         <button onClick={() => this.handleActiveTabChange(2)}>Tab 2</button>
         <button onClick={() => this.handleActiveTabChange(3)}>Tab 3</button>
         <p>Current tab is {this.state.activeTab}</p>
-        <div>
-          Image category ({this.state.activeCategory.image}):
-          <br />
-          <button onClick={() => this.handleCategoryChange({image: "food"})}>food</button>
-          <button onClick={() => this.handleCategoryChange({image: "instrument"})}>instrument</button>
-          <button onClick={() => this.handleCategoryChange({image: "party"})}>party</button>
-        </div>
-        <div>
-          Sound category ({this.state.activeCategory.sound}):
-          <br />
-          <button onClick={() => this.handleCategoryChange({sound: "1"})}>1</button>
-          <button onClick={() => this.handleCategoryChange({sound: "2"})}>2</button>
-          <button onClick={() => this.handleCategoryChange({sound: "3"})}>3</button>
-        </div>
-        <div>
-          Text category ({this.state.activeCategory.text}):
-          <br />
-          <button onClick={() => this.handleCategoryChange({text: "a"})}>a</button>
-          <button onClick={() => this.handleCategoryChange({text: "b"})}>b</button>
-          <button onClick={() => this.handleCategoryChange({text: "c"})}>c</button>
-        </div>
+        <Radio onCategoryChange={this.handleCategoryChange} />
+        
         <p>Image permutation: {(!!this.state.permutation) ? this.state.permutation.imageId : ""}</p>
         <Art
           imageSrc={imageSrc}
