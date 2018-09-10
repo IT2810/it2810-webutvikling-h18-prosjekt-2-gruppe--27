@@ -4,7 +4,7 @@ import Tab from './Tab';
 class Tabs extends Component {
   render() {
     return (
-      <div className="tabs">
+      <div  className={this.props.className}>
         <ol className="tab-list">
           {this.props.children.map((child, index) => {
             const name = child.props.children;

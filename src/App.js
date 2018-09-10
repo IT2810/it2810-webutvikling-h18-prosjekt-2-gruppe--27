@@ -113,6 +113,7 @@ class App extends Component {
         <Tabs
           onActiveTabChange={this.handleActiveTabChange}
           currentTabId={this.state.activeTab}
+          className={"tabs"}
         >
           <div>Art 1</div>
           <div>Art 2</div>
@@ -121,11 +122,15 @@ class App extends Component {
         </Tabs>
 
         <p>Current tab is {this.state.activeTab}</p>
-        <Radio onCategoryChange={this.handleCategoryChange} />
+        <Radio
+          onCategoryChange={this.handleCategoryChange}
+          className={"radio"}
+        />
 
         <p>Image permutation: {(!!this.state.permutation) ? this.state.permutation.imageId : ""}</p>
         <Art
           imageSrc={imageSrc}
+          className={"art"}
         />
       </div>
     );
