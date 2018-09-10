@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  width: 100%;
 }
 
 .App-logo {
@@ -25,4 +26,65 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* Tabs */
+.tabs {
+  /*TODO: implement positioning */
+}
+
+.tab-list {
+  border-bottom: 1px solid #d3d3d3;
+  padding-left: 0;
+}
+
+.tab-item {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  margin-left: 2px;
+  padding: 0.5em 0.75em;
+}
+.tab-item:hover{
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px 5px 0 0;
+  background-color: #e2e2e2;
+}
+
+.tab-item-current {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  margin-left: 2px;
+  padding: 0.5em 0.75em;
+  background-color: #d3d3d3;
+  border-radius: 5px 5px 0 0;
+  border-width: 1px 1px 0 1px;
+}
+
+@media only screen and (max-width: 400px) {
+  .tab-list {
+    border-bottom: 1px solid #d3d3d3;
+    padding-left: 0;
+  }
+
+  .tab-item {
+    display: block;
+    list-style: none;
+    margin-bottom: -1px;
+  }
+  .tab-item:hover{
+    cursor: pointer;
+    border-radius: initial;
+  }
+
+  .tab-item-current {
+    display: block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5em 0.75em;
+    background-color: #d3d3d3;
+    border-radius: initial;
+  }
 }
