@@ -12,7 +12,6 @@ class Radio extends Component {
     this.handleChanges = this.handleChanges.bind(this);
     this.handleChangep = this.handleChangep.bind(this);
     this.handleChanget = this.handleChanget.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //when a radiobutton is clicked
@@ -34,14 +33,6 @@ class Radio extends Component {
     });
   }
 
-
-  //when submitted
-  handleSubmit(event) {
-    event.preventDefault();
-    alert(`You chose the something genre.`);
-  }
-
-
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
@@ -50,33 +41,33 @@ class Radio extends Component {
             <input
               name={"sound"}
               type="radio"
-              value="rock"
-              checked={this.state.sgenre === "rock"}
+              value="animal"
+              checked={this.state.sgenre === "animal"}
               onChange={this.handleChanges}
             />
-            rock
+            animal
           </label>
 
           <label>
             <input
               name={"sound"}
               type="radio"
-              value="dubstep"
-              checked={this.state.sgenre === "dubstep"}
+              value="nature"
+              checked={this.state.sgenre === "nature"}
               onChange={this.handleChanges}
             />
-            dubstep
+            nature
           </label>
 
           <label>
             <input
               name={"sound"}
               type="radio"
-              value="classical"
-              checked={this.state.sgenre === "classical"}
+              value="instrument"
+              checked={this.state.sgenre === "instrument"}
               onChange={this.handleChanges}
             />
-            classical
+            instrument
           </label>
         </div>
 
@@ -86,33 +77,33 @@ class Radio extends Component {
             <input
               name={"picture"}
               type="radio"
-              value="squares"
-              checked={this.state.pgenre === "squares"}
+              value="food"
+              checked={this.state.pgenre === "food"}
               onChange={this.handleChangep}
             />
-            squares
+            food
           </label>
 
           <label>
             <input
               name={"picture"}
               type="radio"
-              value="stars"
-              checked={this.state.pgenre === "stars"}
+              value="instrument"
+              checked={this.state.pgenre === "instrument"}
               onChange={this.handleChangep}
             />
-            stars
+            instrument
           </label>
 
           <label>
             <input
               name={"picture"}
               type="radio"
-              value="hearts"
-              checked={this.state.pgenre === "hearts"}
+              value="party"
+              checked={this.state.pgenre === "party"}
               onChange={this.handleChangep}
             />
-            hearts
+            party
           </label>
         </div>
 
@@ -123,11 +114,11 @@ class Radio extends Component {
             <input
               name={"text"}
               type="radio"
-              value="squares"
-              checked={this.state.tgenre === "squares"}
+              value="poems"
+              checked={this.state.tgenre === "poems"}
               onChange={this.handleChanget}
             />
-            squares
+            poems
           </label>
 
           <label>
@@ -152,11 +143,7 @@ class Radio extends Component {
             hearts
           </label>
         </div>
-
-
-
-        <button type="submit" className="submit-button">Generate art</button>
-        </form>
+      </form>
 
     );
   }
