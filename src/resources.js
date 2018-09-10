@@ -14,7 +14,7 @@ export default {
     ],
     party: [
       "1375909201.svg",
-      "fine_dining.svg",
+      "birday-food.svg",
       "fine_dining.svg",
       "publicdomainq-business-drinking-party.svg"
     ]
