@@ -38,5 +38,25 @@ export default {
       "nature_seagulls.mp3",
       "nature_spring.mp3"
     ]
+  },
+  texts: {
+    hearts: [
+      "dummy1.json",
+      "dummy1.json",
+      "dummy1.json",
+      "dummy1.json"
+    ],
+    poems: [
+      "dummy1.json",
+      "dummy1.json",
+      "dummy1.json",
+      "dummy1.json"
+    ],
+    stars: [
+      "dummy1.json",
+      "dummy1.json",
+      "dummy1.json",
+      "dummy1.json"
+    ]
   }
 };
