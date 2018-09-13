@@ -1,35 +1,24 @@
 import React, { Component } from 'react';
 
 class Radio extends Component {
-  constructor() {
-    super();
-    this.state = {
-      sgenre: '',
-      pgenre: '',
-      tgenre: ''
-    };
+  constructor(props) {
+    super(props);
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event){
-    console.log(event.target.value);
-    console.log(event.target.name);
-    console.log({[event.target.name]: event.target.value});
-    // x = {a: 1, b: 2}
-    // y = "a"
-    // x[y] = 4
-    // x.a = 4
     this.props.onCategoryChange({[event.target.name]: event.target.value});
   }
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit} className={this.props.className}>
+      <form className={this.props.className}>
         <div id="sound" className={"sound"}>
+          sound
           <label>
             <input
-              name={"sound"}
+              name={"sounds"}
               type="radio"
               value="animal"
               onChange={this.handleChange}
@@ -39,7 +28,7 @@ class Radio extends Component {
 
           <label>
             <input
-              name={"sound"}
+              name={"sounds"}
               type="radio"
               value="nature"
               onChange={this.handleChange}
@@ -49,7 +38,7 @@ class Radio extends Component {
 
           <label>
             <input
-              name={"sound"}
+              name={"sounds"}
               type="radio"
               value="instrument"
               onChange={this.handleChange}
@@ -60,9 +49,10 @@ class Radio extends Component {
 
 
         <div id="picture" className={"image"}>
+          picture
           <label>
             <input
-              name={"image"}
+              name={"images"}
               type="radio"
               value="food"
               onChange={this.handleChange}
@@ -72,7 +62,7 @@ class Radio extends Component {
 
           <label>
             <input
-              name={"image"}
+              name={"images"}
               type="radio"
               value="instrument"
               onChange={this.handleChange}
@@ -82,7 +72,7 @@ class Radio extends Component {
 
           <label>
             <input
-              name={"image"}
+              name={"images"}
               type="radio"
               value="party"
               onChange={this.handleChange}
@@ -94,9 +84,10 @@ class Radio extends Component {
 
 
         <div id="text" className={"text"}>
+          text
           <label>
             <input
-              name={"text"}
+              name={"texts"}
               type="radio"
               value="poems"
               onChange={this.handleChange}
@@ -106,7 +97,7 @@ class Radio extends Component {
 
           <label>
             <input
-              name={"text"}
+              name={"texts"}
               type="radio"
               value="stars"
               onChange={this.handleChange}
@@ -116,7 +107,7 @@ class Radio extends Component {
 
           <label>
             <input
-              name={"text"}
+              name={"texts"}
               type="radio"
               value="hearts"
               onChange={this.handleChange}
