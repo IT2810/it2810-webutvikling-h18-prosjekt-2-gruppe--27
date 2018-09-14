@@ -25,7 +25,7 @@ class Radio extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className={this.props.className}>
         <div id="sound" className={"sound"}>
           <label>
             <input

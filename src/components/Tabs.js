@@ -2,17 +2,12 @@ import React, {Component} from 'react';
 import Tab from './Tab';
 
 class Tabs extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-
   render() {
     return (
-      <div className="tabs">
+      <div  className={this.props.className}>
         <ol className="tab-list">
           {this.props.children.map((child, index) => {
-            const name = child.props.name;
+            const name = child.props.children;
             return (
               <Tab
                 currentTabId={this.props.currentTabId}

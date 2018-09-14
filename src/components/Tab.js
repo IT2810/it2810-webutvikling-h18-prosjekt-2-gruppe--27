@@ -6,7 +6,7 @@ class Tab extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick () {
+  onClick() {
     this.props.onClick(this);
   }
 
