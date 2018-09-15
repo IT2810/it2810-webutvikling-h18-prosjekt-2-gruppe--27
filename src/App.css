@@ -1,11 +1,45 @@
 .App {
   text-align: center;
   width: 100%;
+  display:grid;
+  grid-gap: 10px;
+}
+
+.App > div {
+  background: peachpuff;
 }
 
 /* Tabs */
 .tabs {
+  grid-column: 1/3;
+  grid-row: 1/2;
   /*TODO: implement positioning */
+}
+
+.art{
+  display: grid;
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.radio {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.image {
+  grid-column: 1/2;
+  grid-row: 1/3;
+}
+
+.text {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.sound {
+  grid-column: 2/3;
+  grid-row: 2/3;
 }
 
 .tab-list {

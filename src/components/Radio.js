@@ -25,107 +25,108 @@ class Radio extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit} className={this.props.className}>
-        <div id="sound" className={"sound"}>
-          <label>
-            <input
-              name={"sound"}
-              type="radio"
-              value="animal"
-              onChange={this.handleChange}
-            />
-            animal
-          </label>
+      <div className={this.props.className}>
+        <form onSubmit={this.handleSubmit}>
+          <div id="picture" className={"image"}>
+            <p>image</p>
+            <label>
+              <input
+                name={"image"}
+                type="radio"
+                value="food"
+                onChange={this.handleChange}
+              />
+              food
+            </label>
 
-          <label>
-            <input
-              name={"sound"}
-              type="radio"
-              value="nature"
-              onChange={this.handleChange}
-            />
-            nature
-          </label>
+            <label>
+              <input
+                name={"image"}
+                type="radio"
+                value="instrument"
+                onChange={this.handleChange}
+              />
+              instrument
+            </label>
 
-          <label>
-            <input
-              name={"sound"}
-              type="radio"
-              value="instrument"
-              onChange={this.handleChange}
-            />
-            instrument
-          </label>
-        </div>
+            <label>
+              <input
+                name={"image"}
+                type="radio"
+                value="party"
+                onChange={this.handleChange}
+              />
+              party
+            </label>
+          </div>
+          
+          <div id="text" className={"text"}>
+            <p>text</p>
+            <label>
+              <input
+                name={"text"}
+                type="radio"
+                value="dog"
+                onChange={this.handleChange}
+              />
+              dog
+            </label>
 
+            <label>
+              <input
+                name={"text"}
+                type="radio"
+                value="internet"
+                onChange={this.handleChange}
+              />
+              internet
+            </label>
 
-        <div id="picture" className={"image"}>
-          <label>
-            <input
-              name={"image"}
-              type="radio"
-              value="food"
-              onChange={this.handleChange}
-            />
-            food
-          </label>
+            <label>
+              <input
+                name={"text"}
+                type="radio"
+                value="music"
+                onChange={this.handleChange}
+              />
+              music
+            </label>
+          </div>
 
-          <label>
-            <input
-              name={"image"}
-              type="radio"
-              value="instrument"
-              onChange={this.handleChange}
-            />
-            instrument
-          </label>
+          <div id="sound" className={"sound"}>
+            <p>sound</p>
+            <label>
+              <input
+                name={"sound"}
+                type="radio"
+                value="animal"
+                onChange={this.handleChange}
+              />
+              animal
+            </label>
 
-          <label>
-            <input
-              name={"image"}
-              type="radio"
-              value="party"
-              onChange={this.handleChange}
-            />
-            party
-          </label>
-        </div>
+            <label>
+              <input
+                name={"sound"}
+                type="radio"
+                value="nature"
+                onChange={this.handleChange}
+              />
+              nature
+            </label>
 
-
-
-        <div id="text" className={"text"}>
-          <label>
-            <input
-              name={"text"}
-              type="radio"
-              value="poems"
-              onChange={this.handleChange}
-            />
-            poems
-          </label>
-
-          <label>
-            <input
-              name={"text"}
-              type="radio"
-              value="stars"
-              onChange={this.handleChange}
-            />
-            stars
-          </label>
-
-          <label>
-            <input
-              name={"text"}
-              type="radio"
-              value="hearts"
-              onChange={this.handleChange}
-            />
-            hearts
-          </label>
-        </div>
-      </form>
-
+            <label>
+              <input
+                name={"sound"}
+                type="radio"
+                value="instrument"
+                onChange={this.handleChange}
+              />
+              instrument
+            </label>
+          </div>
+        </form>
+      </div>
     );
   }
 }
