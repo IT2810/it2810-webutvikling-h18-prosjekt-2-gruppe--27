@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import ImageView from "./ImageView";
+import SoundView from "./SoundView";
+import TextView from "./TextView";
 
 class Art extends Component {
 
@@ -6,12 +9,18 @@ class Art extends Component {
 
     return (
       <div className={this.props.className}>
-        <div className={"image"}>
-          <img src={this.props.imageSrc} alt={"This is the category"}
-          />
-        </div>
-        <div className={"text"}>textdiv</div>
-        <div className={"sound"}>sounddiv</div>
+        <ImageView
+          className={"image"}
+          image={this.props.image}
+        />
+        <TextView
+          className={"text"}
+          text={this.props.text}
+        />
+        <SoundView
+          className={"sound"}
+          sound={this.props.sound}
+        />
       </div>
     );
   }
