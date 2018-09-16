@@ -8,7 +8,6 @@ class Art extends Component {
       <div className={this.props.className}>
         <div className={"image"}>
           <img src={this.props.imageSrc} alt={"This is the category"}
-               style={{maxWidth: "400px", maxHeight: "400px"}}
           />
         </div>
         <div className={"text"}>textdiv</div>
