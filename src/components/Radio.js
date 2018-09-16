@@ -14,12 +14,12 @@ class Radio extends Component {
   render() {
     return(
       <div className={this.props.className}>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <div id="picture" className={"image"}>
             <p>Image genre:</p>
             <label>
               <input
-                name={"image"}
+                name={"images"}
                 type="radio"
                 value="food"
                 onChange={this.handleChange}
@@ -29,7 +29,7 @@ class Radio extends Component {
 
             <label>
               <input
-                name={"image"}
+                name={"images"}
                 type="radio"
                 value="instrument"
                 onChange={this.handleChange}
@@ -39,7 +39,7 @@ class Radio extends Component {
 
             <label>
               <input
-                name={"image"}
+                name={"images"}
                 type="radio"
                 value="party"
                 onChange={this.handleChange}
@@ -52,7 +52,7 @@ class Radio extends Component {
             <p>Text genre:</p>
             <label>
               <input
-                name={"text"}
+                name={"texts"}
                 type="radio"
                 value="dog"
                 onChange={this.handleChange}
@@ -61,7 +61,7 @@ class Radio extends Component {
             </label>
             <label>
               <input
-                name={"text"}
+                name={"texts"}
                 type="radio"
                 value="internet"
                 onChange={this.handleChange}
@@ -71,7 +71,7 @@ class Radio extends Component {
 
             <label>
               <input
-                name={"text"}
+                name={"texts"}
                 type="radio"
                 value="music"
                 onChange={this.handleChange}
@@ -84,7 +84,7 @@ class Radio extends Component {
             <p>Sound genre:</p>
             <label>
               <input
-                name={"sound"}
+                name={"sounds"}
                 type="radio"
                 value="animal"
                 onChange={this.handleChange}
@@ -94,7 +94,7 @@ class Radio extends Component {
 
             <label>
               <input
-                name={"sound"}
+                name={"sounds"}
                 type="radio"
                 value="nature"
                 onChange={this.handleChange}
@@ -104,7 +104,7 @@ class Radio extends Component {
 
             <label>
               <input
-                name={"sound"}
+                name={"sounds"}
                 type="radio"
                 value="instrument"
                 onChange={this.handleChange}

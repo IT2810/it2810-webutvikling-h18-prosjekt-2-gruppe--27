@@ -40,23 +40,23 @@ export default {
     ]
   },
   texts: {
-    hearts: [
-      "dummy1.json",
-      "dummy1.json",
-      "dummy1.json",
-      "dummy1.json"
+    dog: [
+      "dog_1.json",
+      "dog_2.json",
+      "dog_3.json",
+      "dog_4.json"
     ],
-    poems: [
-      "dummy1.json",
-      "dummy1.json",
-      "dummy1.json",
-      "dummy1.json"
+    internet: [
+      "internet_1.json",
+      "internet_2.json",
+      "internet_3.json",
+      "internet_4.json"
     ],
-    stars: [
-      "dummy1.json",
-      "dummy1.json",
-      "dummy1.json",
-      "dummy1.json"
+    music: [
+      "music_1.json",
+      "music_2.json",
+      "music_3.json",
+      "music_4.json"
     ]
   }
 };
