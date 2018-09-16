@@ -25,8 +25,10 @@
   grid-gap: 10px;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-areas: "image text"
-  "image sound";
+  grid-template-rows: auto;
+  grid-template-areas:
+    "image text"
+    "image sound";
 }
 
 .art > div {
@@ -81,7 +83,32 @@
   border-width: 1px 1px 0 1px;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 627px) {
+  .App {
+    grid-template-columns: auto;
+    grid-template-areas:
+      "tabs"
+      "radio"
+      "art";
+  }
+  .radio label {
+    display: initial;
+    text-align: left;
+  }
+
+  .art {
+    padding: 15px;
+    grid-area: art;
+    grid-gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+      "image"
+      "text"
+      "sound";
+  }
+
   .tab-list {
     border-bottom: 1px solid #d3d3d3;
     padding-left: 0;
