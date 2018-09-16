@@ -3,6 +3,10 @@
   width: 100%;
   display:grid;
   grid-gap: 10px;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 50px auto auto;
+  grid-template-areas: " tabs tabs"
+    "art radio";
 }
 
 .App > div {
@@ -11,35 +15,40 @@
 
 /* Tabs */
 .tabs {
-  grid-column: 1/3;
-  grid-row: 1/2;
+  grid-area: tabs;
   /*TODO: implement positioning */
 }
 
-.art{
+.art {
+  padding: 15px;
+  grid-area: art;
+  grid-gap: 10px;
   display: grid;
-  grid-column: 1/2;
-  grid-row: 2/3;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "image text"
+  "image sound";
 }
 
-.radio {
-  grid-column: 2/3;
-  grid-row: 2/3;
+.art > div {
+  background: #ff9f91;
+  padding: 10px;
 }
 
 .image {
-  grid-column: 1/2;
-  grid-row: 1/3;
+  grid-area: image;
 }
 
 .text {
-  grid-column: 2/3;
-  grid-row: 1/2;
+  grid-area: text;
 }
 
 .sound {
-  grid-column: 2/3;
-  grid-row: 2/3;
+  grid-area: sound;
+}
+
+.radio {
+  padding: 15px;
+  grid-area: radio;
 }
 
 .tab-list {

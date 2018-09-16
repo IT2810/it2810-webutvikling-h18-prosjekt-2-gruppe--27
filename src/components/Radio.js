@@ -28,7 +28,7 @@ class Radio extends Component {
       <div className={this.props.className}>
         <form onSubmit={this.handleSubmit}>
           <div id="picture" className={"image"}>
-            <p>image</p>
+            <p>Image genre:</p>
             <label>
               <input
                 name={"image"}
@@ -59,9 +59,9 @@ class Radio extends Component {
               party
             </label>
           </div>
-          
+          <br/>
           <div id="text" className={"text"}>
-            <p>text</p>
+            <p>Text genre:</p>
             <label>
               <input
                 name={"text"}
@@ -71,7 +71,6 @@ class Radio extends Component {
               />
               dog
             </label>
-
             <label>
               <input
                 name={"text"}
@@ -92,9 +91,9 @@ class Radio extends Component {
               music
             </label>
           </div>
-
+          <br/>
           <div id="sound" className={"sound"}>
-            <p>sound</p>
+            <p>Sound genre:</p>
             <label>
               <input
                 name={"sound"}
