@@ -15,7 +15,7 @@ class Radio extends Component {
     return(
       <div className={this.props.className}>
         <form>
-          <div id="picture">
+          <div id="image">
             <h3>Image genre</h3>
             <label>
               <input

@@ -90,7 +90,6 @@ class App extends Component {
       this.state.activeTab,
       newState.activeCategory,
       newState.permutation));
-    console.log(JSON.stringify(newState, null, " ")); //TODO: remove debug
     this.setState(prevState => {
       return Object.assign(newState, this.calculateResources(
         prevState.resources,
@@ -103,14 +102,12 @@ class App extends Component {
   handleResourceLoading(resourceObject) {
     const fileType = resourceObject.fileType;
     const category = resourceObject.category;
-    console.log("Called", resourceObject);
     if (resourceObject.state === "loading" || resourceObject.state === "loaded") return;
     this.setState(prevState => {
       const resources = Object.assign({}, prevState.resources);
       const resource = Object.assign({}, prevState.resources[fileType][category][resourceObject.id]);
       resource.state = "loading";
       resources[fileType][category][resourceObject.id] = resource;
-      console.log({resources: resources});
       const calculatedResources = this.calculateResources(
         resources,
         prevState.activeTab,
@@ -119,6 +116,7 @@ class App extends Component {
       return Object.assign({resources: resources}, calculatedResources);
     });
     const resourceCopy = Object.assign({}, resourceObject);
+    JSON.parse(JSON.stringify(resourceObject));
     fetch(resourceCopy.url)
       .then(response => {
         switch (resourceCopy.fileType) {
@@ -162,7 +160,6 @@ class App extends Component {
   }
 
   calculateResources(resources, activeTab, activeCategory, permutation){
-    console.log("calculateResources called with args", arguments);
     let image, sound, text;
     if (permutation) {
       if (permutation.images) {
@@ -187,7 +184,6 @@ class App extends Component {
         }
       }
     }
-    console.log("New resources:", {image, sound, text});
     return {image, sound, text};
   }
 
