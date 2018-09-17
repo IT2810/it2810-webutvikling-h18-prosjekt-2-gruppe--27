@@ -1,0 +1,104 @@
+[1mdiff --git a/src/App.js b/src/App.js[m
+[1mindex 31c343f..feb0c6e 100644[m
+[1m--- a/src/App.js[m
+[1m+++ b/src/App.js[m
+[36m@@ -27,42 +27,28 @@[m [mclass App extends Component {[m
+ [m
+     state.activeTab = 0;[m
+     state.activeCategory = {images: "", sounds: "", texts: ""};[m
+[31m-    state.permutation = null;[m
+[32m+[m
+[32m+[m[32m    // generate a random permutation for each file type[m
+[32m+[m[32m    state.permutation = {};[m
+[32m+[m[32m    Object.keys(resources).forEach(type => {[m
+[32m+[m[32m      state.permutation[type] = shuffleArray([0, 1, 2, 3]);[m
+[32m+[m[32m    });[m
+ [m
+     this.state = state;[m
+ [m
+     // bind this to functions[m
+[31m-    this.generatePermutation = this.generatePermutation.bind(this);[m
+     this.handleActiveTabChange = this.handleActiveTabChange.bind(this);[m
+     this.handleCategoryChange = this.handleCategoryChange.bind(this);[m
+     this.handleResourceLoading = this.handleResourceLoading.bind(this);[m
+     this.updateResource = this.updateResource.bind(this);[m
+   }[m
+ [m
+[31m-  generatePermutation(category) {[m
+[31m-    const newPermutation = {};[m
+[31m-    for (const type in this.state.resources) {[m
+[31m-      if (!this.state.resources.hasOwnProperty(type)) continue;[m
+[31m-      for (const cat in this.state.resources[type]) {[m
+[31m-        if (!this.state.resources[type].hasOwnProperty(cat)) continue;[m
+[31m-        if (cat === category[type]) {[m
+[31m-          let resourceArray = this.state.resources[type][cat].slice();[m
+[31m-          shuffleArray(resourceArray);[m
+[31m-          resourceArray = resourceArray.slice(0, 4).map(obj=>obj.id);[m
+[31m-          newPermutation[type] = resourceArray;[m
+[31m-          break;[m
+[31m-        }[m
+[31m-      }[m
+[31m-    }[m
+[31m-    return newPermutation;[m
+[31m-  }[m
+[31m-[m
+   handleActiveTabChange(tabId) {[m
+     this.setState(prevState => Object.assign({activeTab: tabId}, this.calculateResources([m
+       prevState.resources,[m
+       tabId,[m
+       prevState.activeCategory,[m
+[31m-      prevState.permutation[m
+[32m+[m[32m      this.state.permutation[m
+     )));[m
+   }[m
+ [m
+[36m@@ -72,22 +58,17 @@[m [mclass App extends Component {[m
+                          texts = this.state.activeCategory.texts[m
+   } = {}) {[m
+     const newState = {activeCategory: {images, sounds, texts}};[m
+[31m-    if (images !== this.state.activeCategory.images[m
+[31m-      || sounds !== this.state.activeCategory.sounds[m
+[31m-      || texts !== this.state.activeCategory.texts) {[m
+[31m-      newState.permutation = this.generatePermutation(newState.activeCategory);[m
+[31m-    }[m
+     Object.assign(newState, this.calculateResources([m
+       this.state.resources,[m
+       this.state.activeTab,[m
+       newState.activeCategory,[m
+[31m-      newState.permutation));[m
+[32m+[m[32m      this.state.permutation));[m
+     this.setState(prevState => {[m
+       return Object.assign(newState, this.calculateResources([m
+         prevState.resources,[m
+         prevState.activeTab,[m
+         newState.activeCategory,[m
+[31m-        newState.permutation));[m
+[32m+[m[32m        this.state.permutation));[m
+     });[m
+   }[m
+ [m
+[36m@@ -120,21 +101,21 @@[m [mclass App extends Component {[m
+   calculateResources(resources, activeTab, activeCategory, permutation){[m
+     let image, sound, text;[m
+     if (permutation) {[m
+[31m-      if (permutation.images) {[m
+[32m+[m[32m      if (permutation.images && activeCategory.images) {[m
+         let index = permutation.images[activeTab];[m
+         image = resources.images[activeCategory.images][index];[m
+         if (image.state !== "loading" || image.state !== "loaded") {[m
+           this.handleResourceLoading(image);[m
+         }[m
+       }[m
+[31m-      if (permutation.sounds) {[m
+[32m+[m[32m      if (permutation.sounds && activeCategory.sounds) {[m
+         let index = permutation.sounds[activeTab];[m
+         sound = resources.sounds[activeCategory.sounds][index];[m
+         if (sound.state !== "loading" || sound.state !== "loaded") {[m
+           this.handleResourceLoading(sound);[m
+         }[m
+       }[m
+[31m-      if (permutation.texts) {[m
+[32m+[m[32m      if (permutation.texts && activeCategory.texts) {[m
+         let index = permutation.texts[activeTab];[m
+         text = resources.texts[activeCategory.texts][index];[m
+         if (text.state !== "loading" || text.state !== "loaded") {[m

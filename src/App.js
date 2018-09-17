@@ -27,34 +27,20 @@ class App extends Component {
 
     state.activeTab = 0;
     state.activeCategory = {images: "", sounds: "", texts: ""};
-    state.permutation = null;
+
+    // generate a random permutation for each file type
+    state.permutation = {};
+    Object.keys(resources).forEach(type => {
+      state.permutation[type] = shuffleArray([0, 1, 2, 3]);
+    });
 
     this.state = state;
 
     // bind this to functions
-    this.generatePermutation = this.generatePermutation.bind(this);
     this.handleActiveTabChange = this.handleActiveTabChange.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
     this.handleResourceLoading = this.handleResourceLoading.bind(this);
     this.updateResource = this.updateResource.bind(this);
-  }
-
-  generatePermutation(category) {
-    const newPermutation = {};
-    for (const type in this.state.resources) {
-      if (!this.state.resources.hasOwnProperty(type)) continue;
-      for (const cat in this.state.resources[type]) {
-        if (!this.state.resources[type].hasOwnProperty(cat)) continue;
-        if (cat === category[type]) {
-          let resourceArray = this.state.resources[type][cat].slice();
-          shuffleArray(resourceArray);
-          resourceArray = resourceArray.slice(0, 4).map(obj=>obj.id);
-          newPermutation[type] = resourceArray;
-          break;
-        }
-      }
-    }
-    return newPermutation;
   }
 
   handleActiveTabChange(tabId) {
@@ -62,7 +48,7 @@ class App extends Component {
       prevState.resources,
       tabId,
       prevState.activeCategory,
-      prevState.permutation
+      this.state.permutation
     )));
   }
 
@@ -72,22 +58,17 @@ class App extends Component {
                          texts = this.state.activeCategory.texts
   } = {}) {
     const newState = {activeCategory: {images, sounds, texts}};
-    if (images !== this.state.activeCategory.images
-      || sounds !== this.state.activeCategory.sounds
-      || texts !== this.state.activeCategory.texts) {
-      newState.permutation = this.generatePermutation(newState.activeCategory);
-    }
     Object.assign(newState, this.calculateResources(
       this.state.resources,
       this.state.activeTab,
       newState.activeCategory,
-      newState.permutation));
+      this.state.permutation));
     this.setState(prevState => {
       return Object.assign(newState, this.calculateResources(
         prevState.resources,
         prevState.activeTab,
         newState.activeCategory,
-        newState.permutation));
+        this.state.permutation));
     });
   }
 
@@ -120,21 +101,21 @@ class App extends Component {
   calculateResources(resources, activeTab, activeCategory, permutation){
     let image, sound, text;
     if (permutation) {
-      if (permutation.images) {
+      if (permutation.images && activeCategory.images) {
         let index = permutation.images[activeTab];
         image = resources.images[activeCategory.images][index];
         if (image.state !== "loading" || image.state !== "loaded") {
           this.handleResourceLoading(image);
         }
       }
-      if (permutation.sounds) {
+      if (permutation.sounds && activeCategory.sounds) {
         let index = permutation.sounds[activeTab];
         sound = resources.sounds[activeCategory.sounds][index];
         if (sound.state !== "loading" || sound.state !== "loaded") {
           this.handleResourceLoading(sound);
         }
       }
-      if (permutation.texts) {
+      if (permutation.texts && activeCategory.texts) {
         let index = permutation.texts[activeTab];
         text = resources.texts[activeCategory.texts][index];
         if (text.state !== "loading" || text.state !== "loaded") {
