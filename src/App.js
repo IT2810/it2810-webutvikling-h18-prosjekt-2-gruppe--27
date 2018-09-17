@@ -121,7 +121,7 @@ class App extends Component {
       .then(response => {
         switch (resourceCopy.fileType) {
           case "images":
-            return response.blob();
+            return response.text();
           case "sounds":
             return response.blob();
           case "texts":

@@ -5,13 +5,11 @@ class ImageView extends Component {
     let src = "";
     const image = this.props.image;
     if (image && image.state === "loaded") {
-      src = URL.createObjectURL(image.blob);
+      src = image.blob;
     }
     return (
       <div className={this.props.className}>
-        <img src={src} alt={"Generated content"}
-             onLoad={() => URL.revokeObjectURL(src)}
-        />
+        <div dangerouslySetInnerHTML={{__html: src}}/>
       </div>
     );
   }
