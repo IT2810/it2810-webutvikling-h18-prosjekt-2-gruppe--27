@@ -5,7 +5,7 @@ class SoundView extends Component {
     let src = "";
     const sound = this.props.sound;
     if (sound && sound.state === "loaded") {
-      src = URL.createObjectURL(sound.blob);
+      src = URL.createObjectURL(sound.data);
     }
     return (
       <div className={this.props.className}>

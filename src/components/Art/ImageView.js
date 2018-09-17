@@ -5,7 +5,7 @@ class ImageView extends Component {
     let src = "";
     const image = this.props.image;
     if (image && image.state === "loaded") {
-      src = image.blob;
+      src = image.data;
     }
     return (
       <div className={this.props.className}>

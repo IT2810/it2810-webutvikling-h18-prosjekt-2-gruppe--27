@@ -3,6 +3,7 @@ import './App.css';
 import Radio from './components/Radio';
 import Tabs from './components/Tabs.js';
 import Art from "./components/Art/Art";
+import Resource from "./resource";
 import importedResources from "./resources";
 import shuffleArray from "./utils/shuffle";
 
@@ -15,23 +16,13 @@ class App extends Component {
     const resources = JSON.parse(JSON.stringify(importedResources));
 
     // store each file as an object
-    for (let fileType in resources) {
-      if (!resources.hasOwnProperty(fileType)) continue;
-      for (let category in resources[fileType]) {
-        if (!resources[fileType].hasOwnProperty(category)) continue;
-        for (let i = 0; i < resources[fileType][category].length; i++) {
-          const filename = resources[fileType][category][i];
-          resources[fileType][category][i] = {
-            id: i,
-            url: `${fileType}/${category}/${filename}`,
-            fileType: fileType,
-            category: category,
-            state: "initialized",
-            blob: null
-          };
-        }
-      }
-    }
+    Object.keys(resources).forEach(fileType => {
+      Object.keys(resources[fileType]).forEach(category => {
+        resources[fileType][category] = resources[fileType][category].map((filename, index) => {
+          return new Resource(index, fileType, category, filename)
+        });
+      });
+    });
     state.resources = resources;
 
     state.activeTab = 0;
@@ -45,6 +36,7 @@ class App extends Component {
     this.handleActiveTabChange = this.handleActiveTabChange.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
     this.handleResourceLoading = this.handleResourceLoading.bind(this);
+    this.updateResource = this.updateResource.bind(this);
   }
 
   generatePermutation(category) {
@@ -100,14 +92,22 @@ class App extends Component {
   }
 
   handleResourceLoading(resourceObject) {
-    const fileType = resourceObject.fileType;
-    const category = resourceObject.category;
     if (resourceObject.state === "loading" || resourceObject.state === "loaded") return;
+
+    // Update object state to loading
+    const clone = resourceObject.clone();
+    clone.state = "loading";
+    this.updateResource(clone);
+
+    // fetch the object asynchronously
+    clone.fetch().then(result => this.updateResource(result));
+  }
+
+  updateResource(newResource) {
     this.setState(prevState => {
       const resources = Object.assign({}, prevState.resources);
-      const resource = Object.assign({}, prevState.resources[fileType][category][resourceObject.id]);
-      resource.state = "loading";
-      resources[fileType][category][resourceObject.id] = resource;
+      resources[newResource.fileType][newResource.category][newResource.id] = newResource;
+      // might have to update active resources also
       const calculatedResources = this.calculateResources(
         resources,
         prevState.activeTab,
@@ -115,49 +115,7 @@ class App extends Component {
         prevState.permutation);
       return Object.assign({resources: resources}, calculatedResources);
     });
-    const resourceCopy = Object.assign({}, resourceObject);
-    JSON.parse(JSON.stringify(resourceObject));
-    fetch(resourceCopy.url)
-      .then(response => {
-        switch (resourceCopy.fileType) {
-          case "images":
-            return response.text();
-          case "sounds":
-            return response.blob();
-          case "texts":
-            return response.json();
-          default:
-            console.warn("Resource has unknown type", resourceCopy.fileType);
-            break;
-        }
-      })
-      .then(response => {
-        // set state to loaded, store data
-        this.setState(prevState => {
-          const resources = Object.assign({}, prevState.resources);
-          const resource = Object.assign({}, prevState.resources[fileType][category][resourceCopy.id]);
-          resource.state = "loaded";
-          resource.blob = response;
-          resources[fileType][category][resourceCopy.id] = resource;
-          return Object.assign({resources: resources}, this.calculateResources(
-            resources, prevState.activeTab, prevState.activeCategory, prevState.permutation
-          ));
-        })
-      })
-      .catch(reason => {
-        console.error(`Error loading resource ${resourceCopy.url}:\n`, reason);
-        // set state to error
-        this.setState(prevState => {
-          const resources = Object.assign({}, prevState.resources);
-          const resource = Object.assign({}, prevState.resources[fileType][category][resourceCopy.id]);
-          resource.state = "error";
-          resources[fileType][category][resourceCopy.id] = resource;
-          return Object.assign({resources: resources}, this.calculateResources(
-            resources, prevState.activeTab, prevState.activeCategory, prevState.permutation
-          ));
-        })
-      })
-  }
+  };
 
   calculateResources(resources, activeTab, activeCategory, permutation){
     let image, sound, text;

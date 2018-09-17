@@ -5,7 +5,7 @@ class TextView extends Component {
     let textVal = "";
     const text = this.props.text;
     if (text && text.state === "loaded") {
-      textVal = text.blob.text;
+      textVal = text.data.text;
     }
     return (
       <div className={this.props.className}>
