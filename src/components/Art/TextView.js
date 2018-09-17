@@ -11,7 +11,7 @@ class TextView extends Component {
     }
     return (
       <div className={this.props.className}>
-        {textVal}
+        <h3>{textVal}</h3>
         <p>Text: {this.props.text ? this.props.text.state : "No text assigned"}</p>
       </div>
     );

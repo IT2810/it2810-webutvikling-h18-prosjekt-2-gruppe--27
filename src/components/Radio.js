@@ -46,8 +46,8 @@ class Radio extends Component {
               Party
             </label>
           </div>
-          <br/>
-          <div id="text" className={"text"}>
+
+          <div id="text">
             <h3>Text genre</h3>
             <label>
               <input
@@ -77,7 +77,6 @@ class Radio extends Component {
               Music
             </label>
           </div>
-          <br/>
           <div id="sound" className={"sound"}>
             <h3>Sound genre</h3>
             <label>
