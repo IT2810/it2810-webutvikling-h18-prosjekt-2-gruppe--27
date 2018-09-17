@@ -48,7 +48,7 @@
   align-items: center;
 }
 
-.image div svg{
+.image svg{
   display: block;
   width: 100%;
   height: 100%;
@@ -128,8 +128,8 @@
     grid-template-columns: auto;
     grid-template-areas:
       "tabs"
-      "radio"
-      "art";
+      "art"
+      "radio";
   }
   .radio label {
     display: initial;

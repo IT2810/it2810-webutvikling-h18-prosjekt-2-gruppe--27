@@ -8,9 +8,7 @@ class ImageView extends Component {
       src = image.data;
     }
     return (
-      <div className={this.props.className}>
-        <div dangerouslySetInnerHTML={{__html: src}}/>
-      </div>
+      <div className={this.props.className} dangerouslySetInnerHTML={{__html: src}}/>
     );
   }
 }
