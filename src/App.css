@@ -5,10 +5,9 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  text-align: center;
   width: 100%;
   height: 100%;
-  display:grid;
+  display: grid;
   grid-gap: 10px;
   grid-template-rows: 1fr 11fr;
   grid-template-columns: 4fr 1fr;
@@ -17,16 +16,58 @@
     "art radio";
 }
 
-.App > div {
-  background: peachpuff;
+.App div {
+  background: #d3d3d3;
 }
 
-/* Tabs */
+.title {
+  text-align: center;
+}
+
+/* TABS */
 .tabs {
   grid-area: tabs;
   /*TODO: implement positioning */
 }
 
+.tab-list {
+  text-align: center;
+  border-bottom: 4px solid #4186c0;
+  margin-bottom: 5px;
+  padding-left: 0;
+}
+
+.tab-item {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  margin-left: 2px;
+  padding: 0.5em 0.75em;
+}
+
+.tab-item:hover {
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 5px 5px 0 0;
+  background-color: #64a6e3;
+}
+
+.tab-item-current {
+  color: white;
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  margin-left: 2px;
+  padding: 0.5em 0.75em;
+  background-color: #4186c0;
+  border-radius: 5px 5px 0 0;
+  border-width: 1px 1px 0 1px;
+}
+
+/* END OF TABS */
+
+/* ART */
 .art {
   padding: 15px;
   grid-area: art;
@@ -40,7 +81,7 @@
 }
 
 .art div {
-  background: #ff9f91;
+  background: #9db4c0;
   padding: 10px;
 }
 
@@ -51,7 +92,7 @@
   align-items: center;
 }
 
-.image svg{
+.image svg {
   display: block;
   width: 100%;
   height: 100%;
@@ -65,10 +106,12 @@
   justify-content: center;
   align-items: center;
 }
+
 .sound audio {
   display: block;
   width: 100%;
 }
+
 .sound {
   grid-area: sound;
   display: flex;
@@ -76,48 +119,33 @@
   align-items: center;
 }
 
+/* END OF ART */
+
+/* RADIO */
+
 .radio {
   padding: 15px;
   grid-area: radio;
+  display: flex;
+  justify-content: center;
 }
+
+.radio h3 {
+  margin: 10px 0;
+}
+
 .radio label {
   display: block;
   text-align: left;
 }
 
-.tab-list {
-  border-bottom: 1px solid #d3d3d3;
-  padding-left: 0;
-}
+/* END OF RADIO */
 
-.tab-item {
-  display: inline-block;
-  list-style: none;
-  margin-bottom: -1px;
-  margin-left: 2px;
-  padding: 0.5em 0.75em;
-}
-.tab-item:hover{
-  cursor: pointer;
-  transition: background-color 0.3s;
-  border-radius: 5px 5px 0 0;
-  background-color: #e2e2e2;
-}
-
-.tab-item-current {
-  display: inline-block;
-  list-style: none;
-  margin-bottom: -1px;
-  margin-left: 2px;
-  padding: 0.5em 0.75em;
-  background-color: #d3d3d3;
-  border-radius: 5px 5px 0 0;
-  border-width: 1px 1px 0 1px;
-}
-@media only screen and (max-width: 930px){
+@media only screen and (max-width: 930px) {
   .App {
     grid-template-columns: 3fr 1fr;
   }
+
   .art {
     grid-template-columns: 3fr 2fr;
     grid-template-rows: 4fr 1fr;
@@ -126,14 +154,38 @@
       "sound sound";
   }
 }
+
+
 @media only screen and (max-width: 627px) {
+  .hidden { display:none; }
   .App {
     grid-template-columns: auto;
-    grid-template-areas:
-      "tabs"
-      "art"
-      "radio";
+    grid-template-areas: "tabs" "art" "radio";
   }
+  .tab-list {
+    border-bottom: 0;
+    padding-left: 0;
+  }
+
+  .tab-item {
+    display: block;
+    list-style: none;
+    margin-bottom: -1px;
+  }
+
+  .tab-item:hover {
+    cursor: pointer;
+    border-radius: initial;
+  }
+
+  .tab-item-current {
+    display: block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5em 0.75em;
+    border-radius: initial;
+  }
+
   .radio label {
     display: initial;
     text-align: left;
@@ -146,33 +198,8 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas:
-      "image"
-      "text"
-      "sound";
+    grid-template-areas: "image" "text" "sound";
   }
 
-  .tab-list {
-    border-bottom: 0;
-    padding-left: 0;
-  }
 
-  .tab-item {
-    display: block;
-    list-style: none;
-    margin-bottom: -1px;
-  }
-  .tab-item:hover{
-    cursor: pointer;
-    border-radius: initial;
-  }
-
-  .tab-item-current {
-    display: block;
-    list-style: none;
-    margin-bottom: -1px;
-    padding: 0.5em 0.75em;
-    background-color: #d3d3d3;
-    border-radius: initial;
-  }
 }

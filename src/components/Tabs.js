@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import Tab from './Tab';
 
-class Navbar extends Component {
+class Tabs extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <h1>{this.props.title}</h1>
+        <h1 className="title">Artshibition</h1>
         <ol className="tab-list">
           {this.props.children.map((child, index) => {
             const name = child.props.children;
@@ -25,4 +25,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default Tabs;

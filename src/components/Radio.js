@@ -15,6 +15,7 @@ class Radio extends Component {
     return(
       <div className={this.props.className}>
         <form>
+          <h2>Categories</h2>
           <div id="image">
             <h3>Image genre</h3>
             <label>
