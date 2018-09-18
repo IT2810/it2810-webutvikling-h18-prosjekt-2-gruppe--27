@@ -73,9 +73,15 @@
 .text {
   grid-area: text;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.text-source {
+  font-style: italic;
+}
+
 .sound audio {
   display: block;
   width: 100%;
