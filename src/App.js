@@ -96,10 +96,11 @@ class App extends Component {
     // Update object state to loading
     const clone = resourceObject.clone();
     clone.state = "loading";
-    this.updateResource(clone);
-
-    // fetch the object asynchronously
-    clone.fetch().then(result => this.updateResource(result));
+    window.setTimeout(() => {
+      this.updateResource(clone);
+      // fetch the object asynchronously
+      clone.fetch().then(result => this.updateResource(result));
+    });
   }
 
   /**
