@@ -73,12 +73,12 @@
 
 /* ART */
 .art {
-  padding: 15px;
+  padding: 10px;
   grid-area: art;
   grid-gap: 10px;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 3fr 1fr;
+  grid-template-rows: 1fr auto;
   grid-template-areas:
     "image text"
     "image sound";
@@ -121,6 +121,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .text-source {
@@ -143,7 +144,7 @@
 
 /* RADIO */
 .radio {
-  padding: 15px;
+  padding: 10px;
   grid-area: radio;
   display: flex;
   justify-content: center;
@@ -164,10 +165,10 @@
   .App {
     grid-template-columns: 3fr 1fr;
   }
-
+  
   .art {
     grid-template-columns: 3fr 2fr;
-    grid-template-rows: 4fr 1fr;
+    grid-template-rows: 1fr auto;
     grid-template-areas:
       "image text"
       "sound sound";
@@ -179,7 +180,15 @@
   .App {
     grid-template-columns: auto;
     grid-template-rows: auto;
-    grid-template-areas: "tabs" "art" "radio";
+    grid-template-areas:
+      "tabs"
+      "art"
+      "radio";
+  }
+
+  .image svg{
+    height: 400px;
+    max-width: 400px;
   }
   .tab-list {
     border-bottom: 0;
