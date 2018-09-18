@@ -83,6 +83,7 @@
 .sound {
   grid-area: sound;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
