@@ -20,6 +20,10 @@
   background: #d3d3d3;
 }
 
+.radio p {
+  display: none;
+}
+
 .title {
   text-align: center;
 }
@@ -155,6 +159,7 @@
 @media only screen and (max-width: 627px) {
   .App {
     grid-template-columns: auto;
+    grid-template-rows: auto;
     grid-template-areas: "tabs" "art" "radio";
   }
   .tab-list {
@@ -162,6 +167,18 @@
     padding-left: 0;
   }
 
+  .radio h2, .radio h3{
+    display: none;
+  }
+
+  .radio label p{
+    margin: 4px;
+  }
+
+  .radio p{
+    display: inline-block;
+    font-weight: bold;
+  }
   .tab-item {
     display: block;
     list-style: none;
