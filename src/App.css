@@ -27,12 +27,11 @@
 /* TABS */
 .tabs {
   grid-area: tabs;
-  /*TODO: implement positioning */
 }
 
 .tab-list {
   text-align: center;
-  border-bottom: 4px solid #4186c0;
+  border-bottom: 4px solid #539dc0;
   margin-bottom: 5px;
   padding-left: 0;
 }
@@ -40,7 +39,6 @@
 .tab-item {
   display: inline-block;
   list-style: none;
-  margin-bottom: -1px;
   margin-left: 2px;
   padding: 0.5em 0.75em;
 }
@@ -50,7 +48,7 @@
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   border-radius: 5px 5px 0 0;
-  background-color: #64a6e3;
+  background-color: rgb(157, 180, 192)
 }
 
 .tab-item-current {
@@ -60,7 +58,7 @@
   margin-bottom: -1px;
   margin-left: 2px;
   padding: 0.5em 0.75em;
-  background-color: #4186c0;
+  background-color: rgb(83, 157, 192);
   border-radius: 5px 5px 0 0;
   border-width: 1px 1px 0 1px;
 }
@@ -118,11 +116,9 @@
   justify-content: center;
   align-items: center;
 }
-
 /* END OF ART */
 
 /* RADIO */
-
 .radio {
   padding: 15px;
   grid-area: radio;
@@ -157,7 +153,6 @@
 
 
 @media only screen and (max-width: 627px) {
-  .hidden { display:none; }
   .App {
     grid-template-columns: auto;
     grid-template-areas: "tabs" "art" "radio";
@@ -170,15 +165,18 @@
   .tab-item {
     display: block;
     list-style: none;
+    margin-left: 0;
     margin-bottom: -1px;
   }
 
   .tab-item:hover {
+    margin-left: 0;
     cursor: pointer;
     border-radius: initial;
   }
 
   .tab-item-current {
+    margin-left: 0;
     display: block;
     list-style: none;
     margin-bottom: -1px;
