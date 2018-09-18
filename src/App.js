@@ -41,8 +41,14 @@ class App extends Component {
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
     this.handleResourceLoading = this.handleResourceLoading.bind(this);
     this.updateResource = this.updateResource.bind(this);
+    this.calculateResources = this.calculateResources.bind(this);
   }
 
+  /**
+   * A callback function that changes the active tab
+   *
+   * @param tabId the id of the new tab
+   */
   handleActiveTabChange(tabId) {
     this.setState(prevState => Object.assign({activeTab: tabId}, this.calculateResources(
       prevState.resources,
@@ -52,6 +58,13 @@ class App extends Component {
     )));
   }
 
+  /**
+   * A callback function that handles a change in category, usually with
+   *
+   * @param images the category name for the images
+   * @param sounds the category name for the sounds
+   * @param texts the category name for the texts
+   */
   handleCategoryChange({
                          images = this.state.activeCategory.images,
                          sounds = this.state.activeCategory.sounds,
@@ -72,6 +85,11 @@ class App extends Component {
     });
   }
 
+  /**
+   * Attempt to asynchronously load the {@link Resource} if not loaded
+   *
+   * @param resourceObject an instance of {@link Resource}
+   */
   handleResourceLoading(resourceObject) {
     if (resourceObject.state === "loading" || resourceObject.state === "loaded") return;
 
@@ -84,6 +102,12 @@ class App extends Component {
     clone.fetch().then(result => this.updateResource(result));
   }
 
+  /**
+   * Update the state with a new {@link Resource}, the resource should be a clone
+   * of the original
+   *
+   * @param newResource a clone of a {@link Resource} for the next state
+   */
   updateResource(newResource) {
     this.setState(prevState => {
       const resources = Object.assign({}, prevState.resources);
@@ -98,6 +122,15 @@ class App extends Component {
     });
   };
 
+  /**
+   * Given the params, calculates the image, sound and text to be viewed
+   *
+   * @param resources the data structure of all {@link Resource}s
+   * @param activeTab the id of the active tab
+   * @param activeCategory the name of the active category for each category
+   * @param permutation the permutation to be used
+   * @returns {{image: *, sound: *, text: *}} a collection of the resources to be viewed
+   */
   calculateResources(resources, activeTab, activeCategory, permutation){
     let image, sound, text;
     if (permutation) {
