@@ -3,9 +3,9 @@ import './App.css';
 import Radio from './components/Radio';
 import Tabs from './components/Tabs.js';
 import Art from "./components/Art/Art";
+import Resource from "./resource";
 import importedResources from "./resources";
 import shuffleArray from "./utils/shuffle";
-
 
 class App extends Component {
   constructor(props) {
@@ -16,98 +16,150 @@ class App extends Component {
     const resources = JSON.parse(JSON.stringify(importedResources));
 
     // store each file as an object
-    for (let fileType in resources) {
-      if (!resources.hasOwnProperty(fileType)) continue;
-      for (let category in resources[fileType]) {
-        if (!resources[fileType].hasOwnProperty(category)) continue;
-        for (let i = 0; i < resources[fileType][category].length; i++) {
-          const filename = resources[fileType][category][i];
-          resources[fileType][category][i] = {
-                      id: i,
-                      url: `${fileType}/${category}/${filename}`,
-                      loaded: false,
-                      error: false,
-                      blob: null
-          };
-        }
-      }
-    }
+    Object.keys(resources).forEach(fileType => {
+      Object.keys(resources[fileType]).forEach(category => {
+        resources[fileType][category] = resources[fileType][category].map((filename, index) => {
+          return new Resource(index, fileType, category, filename)
+        });
+      });
+    });
     state.resources = resources;
 
     state.activeTab = 0;
-    state.activeCategory = {image: "", sound: "", text: ""};
-    state.permutation = null;
-    // {
-    //   imageId: [],
-    //     soundId: [],
-    //     textId: []
-    // };
+    state.activeCategory = {images: "", sounds: "", texts: ""};
+
+    // generate a random permutation for each file type
+    state.permutation = {};
+    Object.keys(resources).forEach(type => {
+      state.permutation[type] = shuffleArray([0, 1, 2, 3]);
+    });
 
     this.state = state;
 
     // bind this to functions
     this.handleActiveTabChange = this.handleActiveTabChange.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleResourceLoading = this.handleResourceLoading.bind(this);
+    this.updateResource = this.updateResource.bind(this);
+    this.calculateResources = this.calculateResources.bind(this);
   }
 
+  /**
+   * A callback function that changes the active tab
+   *
+   * @param tabId the id of the new tab
+   */
   handleActiveTabChange(tabId) {
-    this.setState({activeTab: tabId});
+    this.setState(prevState => Object.assign({activeTab: tabId}, this.calculateResources(
+      prevState.resources,
+      tabId,
+      prevState.activeCategory,
+      this.state.permutation
+    )));
   }
 
+  /**
+   * A callback function that handles a change in category, usually with
+   *
+   * @param images the category name for the images
+   * @param sounds the category name for the sounds
+   * @param texts the category name for the texts
+   */
   handleCategoryChange({
-                         image = this.state.activeCategory.image,
-                         sound = this.state.activeCategory.sound,
-                         text = this.state.activeCategory.text
+                         images = this.state.activeCategory.images,
+                         sounds = this.state.activeCategory.sounds,
+                         texts = this.state.activeCategory.texts
   } = {}) {
-    console.log(({activeCategory: {image, sound, text}}));
-    this.setState({activeCategory: {image, sound, text}});
+    const newState = {activeCategory: {images, sounds, texts}};
+    Object.assign(newState, this.calculateResources(
+      this.state.resources,
+      this.state.activeTab,
+      newState.activeCategory,
+      this.state.permutation));
+    this.setState(prevState => {
+      return Object.assign(newState, this.calculateResources(
+        prevState.resources,
+        prevState.activeTab,
+        newState.activeCategory,
+        this.state.permutation));
+    });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // calculate new permutation if category changed
-    if (this.state.activeCategory.image !== prevState.activeCategory.image
-      || this.state.activeCategory.sound !== prevState.activeCategory.sound
-      || this.state.activeCategory.text !== prevState.activeCategory.text) {
-      // category changed, generate new random permutation
-      if (this.state.permutation == null) {
-        // initial permutation
-        const images = [...this.state.resources.images[this.state.activeCategory.image]];
-        const getImageId = img => img.id;
-        let imageIds = images.map(getImageId);
-        shuffleArray(imageIds);
-        imageIds = imageIds.slice(0, 4);
-        this.setState({permutation: {
-            imageId: imageIds,
-            soundId: [],
-            textId: []
-          }});
-      } else {
-        // permute previous permutation
-        // TODO: make sure permutation has correct length
-        const permutationCopy = {
-          imageId: [...this.state.permutation.imageId],
-          soundId: [...this.state.permutation.soundId],
-          textId: [...this.state.permutation.textId]
-        };
-        for (let key in permutationCopy){
-          shuffleArray(permutationCopy[key]);
+  /**
+   * Attempt to asynchronously load the {@link Resource} if not loaded
+   *
+   * @param resourceObject an instance of {@link Resource}
+   */
+  handleResourceLoading(resourceObject) {
+    if (resourceObject.state === "loading" || resourceObject.state === "loaded") return;
+
+    // Update object state to loading
+    const clone = resourceObject.clone();
+    clone.state = "loading";
+    this.updateResource(clone);
+
+    // fetch the object asynchronously
+    clone.fetch().then(result => this.updateResource(result));
+  }
+
+  /**
+   * Update the state with a new {@link Resource}, the resource should be a clone
+   * of the original
+   *
+   * @param newResource a clone of a {@link Resource} for the next state
+   */
+  updateResource(newResource) {
+    this.setState(prevState => {
+      const resources = Object.assign({}, prevState.resources);
+      resources[newResource.fileType][newResource.category][newResource.id] = newResource;
+      // might have to update active resources also
+      const calculatedResources = this.calculateResources(
+        resources,
+        prevState.activeTab,
+        prevState.activeCategory,
+        prevState.permutation);
+      return Object.assign({resources: resources}, calculatedResources);
+    });
+  };
+
+  /**
+   * Given the params, calculates the image, sound and text to be viewed
+   *
+   * @param resources the data structure of all {@link Resource}s
+   * @param activeTab the id of the active tab
+   * @param activeCategory the name of the active category for each category
+   * @param permutation the permutation to be used
+   * @returns {{image: *, sound: *, text: *}} a collection of the resources to be viewed
+   */
+  calculateResources(resources, activeTab, activeCategory, permutation){
+    let image, sound, text;
+    if (permutation) {
+      if (permutation.images && activeCategory.images) {
+        let index = permutation.images[activeTab];
+        image = resources.images[activeCategory.images][index];
+        if (image.state !== "loading" || image.state !== "loaded") {
+          this.handleResourceLoading(image);
         }
-        this.setState({permutation: permutationCopy});
+      }
+      if (permutation.sounds && activeCategory.sounds) {
+        let index = permutation.sounds[activeTab];
+        sound = resources.sounds[activeCategory.sounds][index];
+        if (sound.state !== "loading" || sound.state !== "loaded") {
+          this.handleResourceLoading(sound);
+        }
+      }
+      if (permutation.texts && activeCategory.texts) {
+        let index = permutation.texts[activeTab];
+        text = resources.texts[activeCategory.texts][index];
+        if (text.state !== "loading" || text.state !== "loaded") {
+          this.handleResourceLoading(text);
+        }
       }
     }
+    return {image, sound, text};
   }
 
   render() {
-    // calculate correct image
-    let imageSrc = "";
-    if (this.state.permutation && this.state.permutation.imageId) {
-      const images = this.state.resources.images[this.state.activeCategory.image];
-      const image = images.find(img => {
-        return img.id === this.state.permutation.imageId[this.state.activeTab];
-      });
-      imageSrc = image.url;
-    }
-
     return (
       <div className="App">
         <Tabs
@@ -121,16 +173,16 @@ class App extends Component {
           <div>Art 4</div>
         </Tabs>
 
-        <p>Current tab is {this.state.activeTab}</p>
         <Radio
           onCategoryChange={this.handleCategoryChange}
           className={"radio"}
         />
 
-        <p>Image permutation: {(!!this.state.permutation) ? this.state.permutation.imageId : ""}</p>
         <Art
-          imageSrc={imageSrc}
           className={"art"}
+          image={this.state.image}
+          sound={this.state.sound}
+          text={this.state.text}
         />
       </div>
     );

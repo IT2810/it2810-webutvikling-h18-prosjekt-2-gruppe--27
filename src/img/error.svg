@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--part of the matt icon theme by sixsixfive released under CC0 (https://creativecommons.org/publicdomain/zero/1.0/) on openclipart-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128">
+ <defs id="0">
+  <linearGradient id="2">
+   <stop id="G" stop-color="#eee"/>
+   <stop offset="1" id="H" stop-color="#eee" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="3">
+   <stop id="I"/>
+   <stop offset="1" id="J" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="4">
+   <stop id="K" stop-color="#eee"/>
+   <stop offset="1" id="L" stop-color="#dcdcdc"/>
+  </linearGradient>
+  <linearGradient id="5">
+   <stop id="M" stop-color="#e85752"/>
+   <stop offset="1" id="N" stop-color="#af0600"/>
+  </linearGradient>
+  <radialGradient xlink:href="#3" id="6" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1,0,0,0.08641975,0,107.20963)" cx="63.894" cy="117.35" r="53.91"/>
+  <radialGradient xlink:href="#4" id="7" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-1.404511,1.1888571,-0.99999995,-1.1813958,199.73811,11.750541)" cx="60.05" cy="51.39" r="15.03"/>
+  <radialGradient xlink:href="#4" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.5353487,-0.71407287,0.76470596,0.98039217,-143.34962,-215.12271)" r="38.946" cy="148.57" cx="-64" id="8"/>
+  <radialGradient xlink:href="#2" id="9" cx="64.7" cy="-15.174" r="55.27" gradientTransform="matrix(1.5330966,-3.1358239e-8,2.404893e-8,1.1240308,-33.828167,2.9909361)" gradientUnits="userSpaceOnUse"/>
+  <linearGradient xlink:href="#5" id="A" y1="8.707" x2="0" y2="120.54" gradientUnits="userSpaceOnUse"/>
+ </defs>
+ <g id="1">
+  <path id="B" d="m 117.80366,117.35108 a 53.910149,4.6589017 0 1 1 -107.8202997,0 53.910149,4.6589017 0 1 1 107.8202997,0 z" transform="translate(1.2996963,3.4536055)" opacity="0.443" fill="url(#6)"/>
+  <path id="C" d="m 122.08898,64.625572 a 56.734097,55.918617 0 1 1 -113.4681952,0 56.734097,55.918617 0 1 1 113.4681952,0 z" transform="matrix(1.0119373,0,0,1.0266947,-2.1350421,-4.4029736)" fill="url(#A)"/>
+  <path transform="matrix(1.0119373,0,0,1.0266947,-2.1350421,-4.4029736)" d="m 122.08898,64.625572 a 56.734097,55.918617 0 1 1 -113.4681952,0 56.734097,55.918617 0 1 1 113.4681952,0 z" id="D" fill="none" stroke="#9c0f0f" stroke-width="3.924"/>
+  <rect id="E" width="59.56" height="14.13" x="-93.78" y="-69.01" transform="scale(-1,-1)" fill="url(#8)" rx="3.364"/>
+  <path id="F" d="M 65.34375,11.21875 C 35.363897,11.21875 11.125,35.134431 11.125,64.625 C 11.125,94.115569 35.363897,118.03125 65.34375,118.03125 C 95.323603,118.03125 119.59375,94.113876 119.59375,64.625 C 119.59375,35.136124 95.323603,11.21875 65.34375,11.21875 z" transform="matrix(1.0119373,0,0,1.0266947,-2.1350421,-4.4029736)" fill="none" stroke="url(#9)" stroke-width="2.079"/>
+ </g>
+</svg>

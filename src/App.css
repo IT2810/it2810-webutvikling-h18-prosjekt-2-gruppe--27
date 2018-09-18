@@ -1,65 +1,245 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+
 .App {
-  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   width: 100%;
+  height: 100%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-rows: 1fr 11fr;
+  grid-template-columns: 4fr 1fr;
+  grid-template-areas:
+    "tabs tabs"
+    "art radio";
 }
 
-/* Tabs */
+.App div {
+  background: #d3d3d3;
+}
+
+.radio p {
+  display: none;
+}
+
+.title {
+  text-align: center;
+}
+
+/* TABS */
 .tabs {
-  /*TODO: implement positioning */
+  grid-area: tabs;
 }
 
 .tab-list {
-  border-bottom: 1px solid #d3d3d3;
+  text-align: center;
+  border-bottom: 4px solid #539dc0;
+  margin-bottom: 5px;
   padding-left: 0;
 }
 
 .tab-item {
   display: inline-block;
   list-style: none;
-  margin-bottom: -1px;
   margin-left: 2px;
   padding: 0.5em 0.75em;
 }
-.tab-item:hover{
+
+.tab-item:hover {
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
   border-radius: 5px 5px 0 0;
-  background-color: #e2e2e2;
+  background-color: rgb(157, 180, 192)
 }
 
 .tab-item-current {
+  color: white;
   display: inline-block;
   list-style: none;
   margin-bottom: -1px;
   margin-left: 2px;
   padding: 0.5em 0.75em;
-  background-color: #d3d3d3;
+  background-color: rgb(83, 157, 192);
   border-radius: 5px 5px 0 0;
   border-width: 1px 1px 0 1px;
 }
 
-@media only screen and (max-width: 400px) {
+/* END OF TABS */
+
+/* ART */
+.art {
+  padding: 15px;
+  grid-area: art;
+  grid-gap: 10px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 3fr 1fr;
+  grid-template-areas:
+    "image text"
+    "image sound";
+}
+
+.art div {
+  background: #9db4c0;
+  padding: 10px;
+}
+
+.image {
+  grid-area: image;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.img-template {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.rotate {
+  animation: kf-spin infinite 20s linear;
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.text {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-source {
+  font-style: italic;
+}
+
+.sound audio {
+  display: block;
+  width: 100%;
+}
+
+.sound {
+  grid-area: sound;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* END OF ART */
+
+/* RADIO */
+.radio {
+  padding: 15px;
+  grid-area: radio;
+  display: flex;
+  justify-content: center;
+}
+
+.radio h3 {
+  margin: 10px 0;
+}
+
+.radio label {
+  display: block;
+  text-align: left;
+}
+
+/* END OF RADIO */
+
+@media only screen and (max-width: 930px) {
+  .App {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  .art {
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 4fr 1fr;
+    grid-template-areas:
+      "image text"
+      "sound sound";
+  }
+}
+
+
+@media only screen and (max-width: 627px) {
+  .App {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: "tabs" "art" "radio";
+  }
   .tab-list {
-    border-bottom: 1px solid #d3d3d3;
+    border-bottom: 0;
     padding-left: 0;
   }
 
+  .radio h2, .radio h3{
+    display: none;
+  }
+
+  .radio label p{
+    margin: 4px;
+  }
+
+  .radio p{
+    display: inline-block;
+    font-weight: bold;
+  }
   .tab-item {
     display: block;
     list-style: none;
+    margin-left: 0;
     margin-bottom: -1px;
   }
-  .tab-item:hover{
+
+  .tab-item:hover {
+    margin-left: 0;
     cursor: pointer;
     border-radius: initial;
   }
 
   .tab-item-current {
+    margin-left: 0;
     display: block;
     list-style: none;
     margin-bottom: -1px;
     padding: 0.5em 0.75em;
-    background-color: #d3d3d3;
     border-radius: initial;
   }
+
+  .radio label {
+    display: initial;
+    text-align: left;
+  }
+
+  .art {
+    padding: 15px;
+    grid-area: art;
+    grid-gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "image" "text" "sound";
+  }
+
+
+}
+
+
+@keyframes kf-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
