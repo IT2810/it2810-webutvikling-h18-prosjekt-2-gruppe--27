@@ -98,11 +98,27 @@
   max-height: 400px;
 }
 
+.img-template {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.rotate {
+  animation: kf-spin infinite 20s linear;
+  max-width: 40px;
+  max-height: 40px;
+}
+
 .text {
   grid-area: text;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.text-source {
+  font-style: italic;
 }
 
 .sound audio {
@@ -113,6 +129,7 @@
 .sound {
   grid-area: sound;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -200,4 +217,10 @@
   }
 
 
+}
+
+
+@keyframes kf-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
