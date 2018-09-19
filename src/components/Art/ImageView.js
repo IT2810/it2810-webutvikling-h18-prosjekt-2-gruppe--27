@@ -24,7 +24,7 @@ class ImageView extends Component {
     if (default_src){
       return (
         <div className={this.props.className}>
-          <img className={default_className} src={default_src}/>
+          <img className={default_className} src={default_src} alt={"This is the default content"} />
         </div>
       );
     }
