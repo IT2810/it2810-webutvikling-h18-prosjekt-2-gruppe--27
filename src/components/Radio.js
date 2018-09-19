@@ -49,7 +49,7 @@ class Radio extends Component {
           </div>
 
           <h3>Text genre</h3>
-          <p id="textLabel">Texts:</p>
+          <p id="textLabel">Text:</p>
           <div id="text">
             <label>
               <input
